@@ -1,0 +1,182 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================
+   V&C Control - Sistema de Diseño "Tech Orgánico"
+   ============================================ */
+
+:root {
+  --bg: #F2F0E9;
+  --primary: #2E4036;
+  --accent: #CC5833;
+  --dark: #1A1A1A;
+  --muted: #8B8B7A;
+  
+  --font-heading: 'Plus Jakarta Sans', sans-serif;
+  --font-body: 'Outfit', sans-serif;
+  --font-accent: 'Cormorant Garamond', serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+  
+  --radius-sm: 0.75rem;
+  --radius-md: 1rem;
+  --radius-lg: 1.5rem;
+  --radius-xl: 2rem;
+  
+  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.06);
+  --shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.1);
+  
+  --transition-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg);
+  color: var(--dark);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Textura de ruido visual */
+.noise-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.font-accent {
+  font-family: var(--font-accent);
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+/* Links */
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s var(--transition-smooth);
+}
+
+/* Scrollbar personalizado */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--muted);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
+
+/* Focus states accesibles */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ============================================
+   Utilidades personalizadas
+   ============================================ */
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .transition-smooth {
+    transition-timing-function: var(--transition-smooth);
+  }
+  
+  .hover-lift {
+    transition: transform 0.2s var(--transition-smooth), box-shadow 0.2s var(--transition-smooth);
+  }
+  
+  .hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-hover);
+  }
+  
+  .hover-scale {
+    transition: transform 0.2s var(--transition-smooth);
+  }
+  
+  .hover-scale:hover {
+    transform: scale(1.02);
+  }
+}
+
+/* ============================================
+   Componentes base
+   ============================================ */
+
+@layer components {
+  .card {
+    @apply bg-white rounded-xl shadow-card p-6 transition-all duration-200;
+  }
+  
+  .card:hover {
+    @apply shadow-card-hover;
+  }
+  
+  .badge {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium;
+  }
+  
+  .badge-pendiente {
+    @apply bg-gray-100 text-muted;
+  }
+  
+  .badge-en_progreso {
+    @apply bg-blue-100 text-blue-700;
+  }
+  
+  .badge-completado {
+    @apply bg-green-100 text-green-700;
+  }
+  
+  .input-base {
+    @apply w-full px-4 py-3 bg-white border border-gray-200 rounded-lg
+           font-body text-dark placeholder:text-muted
+           focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10
+           transition-all duration-200;
+  }
+  
+  .label-base {
+    @apply block text-sm font-medium text-primary mb-2;
+  }
+}
